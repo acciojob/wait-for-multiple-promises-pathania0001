@@ -7,11 +7,11 @@ const promise = (time)=>{
 
 const exePromise = async()=>{
 	const startTime = performance.now();
-	const p1 = promise(2000);
-	const p2 = promise(1000);
-	const p3 = promise(3000);
- Promise.all([p1,p2,p3]).then((data)=>{
-	 document.querySelector(".loading").style.display = "none";
+	 const promises = [1000,2000,3000].map((time) => promise(time));
+
+ Promise.all(promises).then((data)=>{
+	 const loadingRow = document.getElementById("loading");
+      if (loadingRow) loadingRow.remove();
 	 data.forEach((res,index)=>{
 			tbody.innerHTML += `
         <tr>
@@ -19,10 +19,10 @@ const exePromise = async()=>{
           <td>${res}</td>
         </tr>
       `;
-	 }).catch((error)=>{console.log(error)})
+	 })
 	 tbody.innerHTML += `<tr><td>Total</td><td>${((performance.now()-startTime)/1000).toFixed(3
 																							 )}</td></tr>`
- })
+ }).catch((error)=>{console.log(error)});
 	
 }
 exePromise()
