@@ -19,7 +19,7 @@ const exePromise = async()=>{
           <td>${res}</td>
         </tr>
       `;
-	 });
+	 }).catch((error)=>{console.log(error)})
 	 tbody.innerHTML += `<tr><td>Total</td><td>${((performance.now()-startTime)/1000).toFixed(3
 																							 )}</td></tr>`
  })
